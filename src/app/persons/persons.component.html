@@ -12,8 +12,8 @@
   </ul>
 </div>
 <div>
-  <!-- On definit que le FormGroup associé a c formulaire est form.
-       On déclare la fonction a appeler lorsqu'on soumet le formulaire. -->
+  <!-- On definit que le FormGroup associé à ce formulaire est 'form'.
+       On déclare la fonction à appeler lorsqu'on soumet le formulaire. -->
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <!-- On associe le input avec le champ name -->
     <input name="name" formControlName="name" />
