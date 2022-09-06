@@ -1,0 +1,22 @@
+<div>
+  <ul>
+    <!-- On utilise le pipe async pour extraire les données de l'observable. -->
+    <li *ngFor="let p of persons$ | async">
+      <!-- On inclue ici le composant Person en spécifiant les inputs et output -->
+      <app-person
+        [id]="p.id"
+        [name]="p.name"
+        (onDelete)="delete(p.id)"
+      ></app-person>
+    </li>
+  </ul>
+</div>
+<div>
+  <!-- On definit que le FormGroup associé a c formulaire est form.
+       On déclare la fonction a appeler lorsqu'on soumet le formulaire. -->
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <!-- On associe le input avec le champ name -->
+    <input name="name" formControlName="name" />
+    <button class="button" type="submit">Ajouter</button>
+  </form>
+</div>

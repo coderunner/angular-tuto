@@ -1,0 +1,26 @@
+<!-- Utiliser {{ }} pour faire référence aux variables ou méthodes publiques du composant-->
+<p>v = {{ variable }}</p>
+
+<!-- L'opérateur | permet d'utiliser des pipes (fonctions) pour l'affichage -->
+<p>V = {{ variable | uppercase }}</p>
+
+<!-- Utiliser [(ngModel)] pour définir un two-way binding -->
+<input name="variable" [(ngModel)]="variable" />
+
+<!-- Utiliser (...) pour associer une fonction qui sera déclanchée par un événement particulier. -->
+<!-- $event capture l'événement -->
+<button (click)="delete($event)">x</button>
+
+<!-- *ngIf pour un affichage conditionnel -->
+<div *ngIf="variable.includes('a'); else otherTemplate">
+  <p>Contient un 'a'</p>
+</div>
+
+<div>
+  <!-- *ngFor pour itérer -->
+  <span *ngFor="let c of toChar(variable)">{{ c }}, </span>
+</div>
+
+<!-- ng-template permet de définir des sections de HTML qui ne sont pas afficher
+La syntaxe #nom permet de faire référence à l'élément ailleurs dans le template -->
+<ng-template #otherTemplate><p>Ne contient pas de 'a'</p></ng-template>
