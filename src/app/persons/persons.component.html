@@ -1,7 +1,8 @@
 <div>
   <ul>
     <!-- On utilise le pipe async pour extraire les données de l'observable. -->
-    <li *ngFor="let p of persons$ | async">
+    <!-- VARIATION avec ASYNC - <li *ngFor="let p of persons$ | async"> -->
+    <li *ngFor="let p of persons">
       <!-- On inclue ici le composant Person en spécifiant les inputs et output -->
       <app-person
         [id]="p.id"
