@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Person } from '../model/person';
+import { Person } from './person.model';
 
 /**
  * Les services sont injectables dans les composants via l'injection de dépendances de Angular

@@ -5,7 +5,11 @@
 <p>V = {{ variable | uppercase }}</p>
 
 <!-- Utiliser [(ngModel)] pour définir un two-way binding -->
-<input name="variable" [(ngModel)]="variable" (ngModelChange)="onChange()" />
+<input
+  name="variable"
+  [(ngModel)]="variable"
+  (ngModelChange)="onValueChange()"
+/>
 
 <!-- Utiliser (...) pour associer une fonction qui sera déclanchée par un événement particulier. -->
 <!-- $event capture l'événement -->

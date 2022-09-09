@@ -1,0 +1,11 @@
+<app-persons
+  [persons]="persons"
+  (addPerson)="onAddPerson($event)"
+  (deletePerson)="onDeletePerson($event)"
+></app-persons>
+<!-- ASYNC VERSION -->
+<!-- <app-persons
+  [persons]="persons$ | async"
+  (addPerson)="onAddPerson($event)"
+  (deletePerson)="onDeletePerson($event)"
+></app-persons> -->

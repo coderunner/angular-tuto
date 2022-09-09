@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { LocalStorageService } from '../services/local-storage.service';
+import { LocalStorageService } from '../local-storage.service';
 
 /**
  * Identifie le composant et pointe vers les fichiers qui lui sont liés.
@@ -17,18 +17,19 @@ export class ComposantComponent implements OnInit, OnDestroy {
   private static DEFAULT_NAME = 'Anna';
 
   // Les variables publiques sont accessibles dans le template
-  variable: string;
+  variable: string = '';
 
   constructor(private localeStorageService: LocalStorageService) {
     console.log('construction');
-    this.variable =
-      this.localeStorageService.get(ComposantComponent.STORAGE_KEY) ||
-      ComposantComponent.DEFAULT_NAME;
   }
 
   // Accroche lors de l'initialisation du composant
   ngOnInit(): void {
     console.log('init');
+    const stored = this.localeStorageService.get(
+      ComposantComponent.STORAGE_KEY
+    );
+    this.variable = stored !== null ? stored : ComposantComponent.DEFAULT_NAME;
   }
 
   // Accroche lors de la destruction du composant
@@ -36,18 +37,23 @@ export class ComposantComponent implements OnInit, OnDestroy {
     console.log('destruction');
   }
 
-  onChange() {
-    this.localeStorageService.set(
-      ComposantComponent.STORAGE_KEY,
-      this.variable
-    );
+  onValueChange() {
+    this.saveInLocalStorage();
   }
 
   delete(event: MouseEvent) {
     this.variable = '';
+    this.saveInLocalStorage();
   }
 
   toChar(s: string): string[] {
     return Array.from(s);
+  }
+
+  private saveInLocalStorage() {
+    this.localeStorageService.set(
+      ComposantComponent.STORAGE_KEY,
+      this.variable
+    );
   }
 }
