@@ -1,0 +1,10 @@
+<button (click)="onClick()">Clique moi!</button>
+
+<!-- # permet de nommer l'élément et de réutiliser sa référence ailleurs dans le HTML -->
+<app-child #child>
+  <!-- Possibilite d'injecter du contenu à l'enfant -->
+  <p>Contenu venant du parent.</p>
+</app-child>
+
+<!-- On réutilise la référence définie plus haut pour accéder au attributs et méthodes publiques. -->
+<p>Texte de l'enfant: {{ child.text }}</p>

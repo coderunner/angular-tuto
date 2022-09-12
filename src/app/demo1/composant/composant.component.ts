@@ -19,16 +19,14 @@ export class ComposantComponent implements OnInit, OnDestroy {
   // Les variables publiques sont accessibles dans le template
   variable: string = '';
 
-  constructor(private localeStorageService: LocalStorageService) {
+  constructor(private localStorageService: LocalStorageService) {
     console.log('construction');
   }
 
   // Accroche lors de l'initialisation du composant
   ngOnInit(): void {
     console.log('init');
-    const stored = this.localeStorageService.get(
-      ComposantComponent.STORAGE_KEY
-    );
+    const stored = this.localStorageService.get(ComposantComponent.STORAGE_KEY);
     this.variable = stored !== null ? stored : ComposantComponent.DEFAULT_NAME;
   }
 
@@ -37,23 +35,24 @@ export class ComposantComponent implements OnInit, OnDestroy {
     console.log('destruction');
   }
 
+  // Lorsque la valeur change, on stock dans le LocalStorage
   onValueChange() {
     this.saveInLocalStorage();
   }
 
+  // Sur un delete, on efface la variable et stock dans LocalStorage
   delete(event: MouseEvent) {
     this.variable = '';
     this.saveInLocalStorage();
   }
 
+  // Méthod publique pour convertir une chaîne de charactères en tableau de charactères
   toChar(s: string): string[] {
     return Array.from(s);
   }
 
+  // Méthode privée pour centraliser la sauvegarde dans le LocalStorage
   private saveInLocalStorage() {
-    this.localeStorageService.set(
-      ComposantComponent.STORAGE_KEY,
-      this.variable
-    );
+    this.localStorageService.set(ComposantComponent.STORAGE_KEY, this.variable);
   }
 }

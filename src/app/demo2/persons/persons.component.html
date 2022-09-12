@@ -1,7 +1,7 @@
 <div>
   <ul>
     <li *ngFor="let p of persons">
-      <!-- On inclue ici le composant Person en spécifiant les inputs et output -->
+      <!-- On inclue ici le composant Person en spécifiant les inputs (id, name) et output (onDelete) -->
       <app-person
         [id]="p.id"
         [name]="p.name"
@@ -14,8 +14,8 @@
   <!-- On definit que le FormGroup associé à ce formulaire est 'form'.
        On déclare la fonction à appeler lorsqu'on soumet le formulaire. -->
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <!-- On associe le input avec le champ name -->
+    <!-- On associe l'élément 'input' avec le champ 'name' du formulaire -->
     <input name="name" formControlName="name" />
-    <button class="button" type="submit">Ajouter</button>
+    <button type="submit">Ajouter</button>
   </form>
 </div>
