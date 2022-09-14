@@ -13,11 +13,11 @@ import { LocalStorageService } from '../local-storage.service';
   styleUrls: ['./composant.component.css'],
 })
 export class ComposantComponent implements OnInit, OnDestroy {
-  private static STORAGE_KEY = 'last_name_key';
-  private static DEFAULT_NAME = 'Anna';
+  private static STORAGE_KEY = 'last_value_key';
+  private static DEFAULT_VALUE = 'inf5190';
 
   // Les variables publiques sont accessibles dans le template
-  variable: string = '';
+  value: string = '';
   currentTimestamp = Date.now();
 
   constructor(private localStorageService: LocalStorageService) {
@@ -28,7 +28,7 @@ export class ComposantComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     console.log('init');
     const stored = this.localStorageService.get(ComposantComponent.STORAGE_KEY);
-    this.variable = stored !== null ? stored : ComposantComponent.DEFAULT_NAME;
+    this.value = stored !== null ? stored : ComposantComponent.DEFAULT_VALUE;
   }
 
   // Accroche lors de la destruction du composant
@@ -43,7 +43,7 @@ export class ComposantComponent implements OnInit, OnDestroy {
 
   // Sur un delete, on efface la variable et stock dans LocalStorage
   delete(event: MouseEvent) {
-    this.variable = '';
+    this.value = '';
     this.saveInLocalStorage();
   }
 
@@ -54,6 +54,6 @@ export class ComposantComponent implements OnInit, OnDestroy {
 
   // Méthode privée pour centraliser la sauvegarde dans le LocalStorage
   private saveInLocalStorage() {
-    this.localStorageService.set(ComposantComponent.STORAGE_KEY, this.variable);
+    this.localStorageService.set(ComposantComponent.STORAGE_KEY, this.value);
   }
 }

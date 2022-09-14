@@ -1,32 +1,28 @@
 <!-- Utiliser {{ }} pour faire référence aux variables ou méthodes publiques du composant-->
-<p>v = {{ variable }}</p>
+<p>valeur du input = {{ value }}</p>
 
 <!-- L'opérateur | permet d'utiliser des pipes (fonctions) pour l'affichage -->
-<p>V = {{ variable | uppercase }}</p>
+<p>valeur du input (en majuscule) = {{ value | uppercase }}</p>
 
 <p>Date = {{ currentTimestamp | date }}</p>
 
 <!-- Utiliser [(ngModel)] pour définir un two-way binding -->
-<input
-  name="variable"
-  [(ngModel)]="variable"
-  (ngModelChange)="onValueChange()"
-/>
+<input name="variable" [(ngModel)]="value" (ngModelChange)="onValueChange()" />
 
 <!-- Utiliser (...) pour associer une fonction qui sera déclanchée par un événement particulier. -->
 <!-- $event capture l'événement -->
 <button (click)="delete($event)">x</button>
 
 <!-- *ngIf pour un affichage conditionnel -->
-<div *ngIf="variable.includes('a'); else otherTemplate">
+<div *ngIf="value.includes('a'); else otherTemplate">
   <p>Contient un 'a'</p>
 </div>
 
 <div>
   <!-- *ngFor pour itérer -->
-  <span *ngFor="let c of toChar(variable); let i = index">
+  <span *ngFor="let c of toChar(value); let i = index">
     <span>{{ c }}</span
-    ><span *ngIf="i !== toChar(variable).length">, </span>
+    ><span *ngIf="i !== toChar(value).length">, </span>
   </span>
 </div>
 
