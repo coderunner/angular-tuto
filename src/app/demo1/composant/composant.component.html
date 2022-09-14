@@ -4,6 +4,8 @@
 <!-- L'opérateur | permet d'utiliser des pipes (fonctions) pour l'affichage -->
 <p>V = {{ variable | uppercase }}</p>
 
+<p>Date = {{ currentTimestamp | date }}</p>
+
 <!-- Utiliser [(ngModel)] pour définir un two-way binding -->
 <input
   name="variable"
@@ -22,7 +24,10 @@
 
 <div>
   <!-- *ngFor pour itérer -->
-  <span *ngFor="let c of toChar(variable)">{{ c }}, </span>
+  <span *ngFor="let c of toChar(variable); let i = index">
+    <span>{{ c }}</span
+    ><span *ngIf="i !== toChar(variable).length">, </span>
+  </span>
 </div>
 
 <!-- ng-template permet de définir des sections de HTML qui ne sont pas afficher

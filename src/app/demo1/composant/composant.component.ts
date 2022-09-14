@@ -18,6 +18,7 @@ export class ComposantComponent implements OnInit, OnDestroy {
 
   // Les variables publiques sont accessibles dans le template
   variable: string = '';
+  currentTimestamp = Date.now();
 
   constructor(private localStorageService: LocalStorageService) {
     console.log('construction');
