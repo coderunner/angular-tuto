@@ -22,7 +22,7 @@
   <!-- *ngFor pour itérer -->
   <span *ngFor="let c of toChar(value); let i = index">
     <span>{{ c }}</span
-    ><span *ngIf="i !== toChar(value).length">, </span>
+    ><span *ngIf="i !== toChar(value).length - 1">, </span>
   </span>
 </div>
 
