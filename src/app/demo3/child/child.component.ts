@@ -12,7 +12,7 @@ export class ChildComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  publicMethod(text: string) {
+  setText(text: string) {
     this.text = text;
   }
 }

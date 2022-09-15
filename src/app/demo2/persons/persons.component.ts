@@ -1,43 +1,54 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { Person } from '../person.model';
+import { PersonService } from '../person.service';
 
 @Component({
   selector: 'app-persons',
   templateUrl: './persons.component.html',
   styleUrls: ['./persons.component.css'],
 })
-export class PersonsComponent implements OnInit {
+export class PersonsComponent implements OnInit, OnDestroy {
   // On crée la structure du formulaire.
   // On assigne le formulaire et ses champs dans le HTML
   form = this.formBuilder.group({
     name: '',
   });
 
-  @Input()
-  persons: Person[] | null = null;
+  persons: Person[] = [];
 
-  @Output()
-  addPerson = new EventEmitter<string>();
-
-  @Output()
-  deletePerson = new EventEmitter<number>();
+  private personsSubscription: Subscription;
 
   // Angular nous injecte les dépendances!
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private personService: PersonService
+  ) {
+    this.personsSubscription = this.personService
+      .getPersons()
+      .subscribe((persons) => (this.persons = persons));
+  }
 
   ngOnInit(): void {}
 
+  ngOnDestroy(): void {
+    if (this.personsSubscription) {
+      this.personsSubscription.unsubscribe();
+    }
+  }
+
   onSubmit(): void {
     if (this.form.valid) {
+      console.log(this.form.value);
       if (this.form.value.name) {
-        this.addPerson.emit(this.form.value.name);
+        this.personService.add(this.form.value.name);
       }
       this.form.reset();
     }
   }
 
   delete(id: number) {
-    this.deletePerson.emit(id);
+    this.personService.delete(id);
   }
 }

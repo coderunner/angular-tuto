@@ -7,6 +7,7 @@ import { ChildComponent } from '../child/child.component';
   styleUrls: ['./parent.component.css'],
 })
 export class ParentComponent implements OnInit {
+  //@ViewChild('childInTemplate')
   @ViewChild(ChildComponent)
   child: ChildComponent | undefined;
 
@@ -16,7 +17,7 @@ export class ParentComponent implements OnInit {
 
   onClick() {
     if (this.child) {
-      this.child.publicMethod(Math.random().toString());
+      this.child.setText(Math.random().toString());
     }
   }
 }
