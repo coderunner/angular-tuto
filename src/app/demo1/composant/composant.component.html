@@ -20,9 +20,9 @@
 
 <div>
   <!-- *ngFor pour itérer -->
-  <span *ngFor="let c of toChar(value); let i = index">
+  <span *ngFor="let c of toChar(value); let last = last">
     <span>{{ c }}</span
-    ><span *ngIf="i !== toChar(value).length - 1">, </span>
+    ><span *ngIf="!last">, </span>
   </span>
 </div>
 
