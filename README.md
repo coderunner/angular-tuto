@@ -4,7 +4,7 @@ Exécuter
 
 ```
 npm install
-ng server
+ng serve
 ```
 
 pour vous amuser :)
