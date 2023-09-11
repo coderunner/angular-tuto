@@ -2,38 +2,38 @@ import { Component, Signal, computed } from "@angular/core";
 import { FilterService } from "../filter.service";
 import { Observable, map } from "rxjs";
 
+const VEGETABLES = ["patate", "carotte", "navet"];
+const FRUITS = ["pomme", "poire", "banane"];
+
 @Component({
   selector: "app-page",
   templateUrl: "./page.component.html",
   styleUrls: ["./page.component.css"],
 })
 export class PageComponent {
-  vegetables = ["patate", "carotte", "navet"];
-  fruits = ["pomme", "poire", "banane"];
-
-  filteredVegetables: Observable<string[]>;
+  filteredVegetables$: Observable<string[]>;
   filteredFruits: Signal<string[]>;
 
   constructor(private filterService: FilterService) {
-    this.filteredVegetables = this.filterService.getFilterObservable().pipe(
+    this.filteredVegetables$ = this.filterService.getFilterObservable().pipe(
       map((filter) => {
         if (filter) {
-          return this.vegetables.filter((item) =>
+          return VEGETABLES.filter((item) =>
             item.toLowerCase().includes(filter.toLowerCase())
           );
         }
-        return this.vegetables;
+        return VEGETABLES;
       })
     );
 
     this.filteredFruits = computed(() => {
       const filter = this.filterService.getFilterSignal()();
       if (filter) {
-        return this.fruits.filter((item) =>
+        return FRUITS.filter((item) =>
           item.toLowerCase().includes(filter.toLowerCase())
         );
       }
-      return this.fruits;
+      return FRUITS;
     });
   }
 }

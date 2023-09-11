@@ -1,5 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { LocalStorageService } from '../local-storage.service';
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { LocalStorageService } from "../local-storage.service";
 
 /**
  * Identifie le composant et pointe vers les fichiers qui lui sont liés.
@@ -8,32 +8,32 @@ import { LocalStorageService } from '../local-storage.service';
  * pour inclure ce composant.
  */
 @Component({
-  selector: 'app-composant',
-  templateUrl: './composant.component.html',
-  styleUrls: ['./composant.component.css'],
+  selector: "app-composant",
+  templateUrl: "./composant.component.html",
+  styleUrls: ["./composant.component.css"],
 })
 export class ComposantComponent implements OnInit, OnDestroy {
-  private static STORAGE_KEY = 'last_value_key';
-  private static DEFAULT_VALUE = 'inf5190';
+  private static STORAGE_KEY = "last_value_key";
+  private static DEFAULT_VALUE = "inf5190";
 
   // Les variables publiques sont accessibles dans le template
-  value: string = '';
+  value: string = "";
   currentTimestamp = Date.now();
 
   constructor(private localStorageService: LocalStorageService) {
-    console.log('construction');
+    console.log("construction");
   }
 
   // Accroche lors de l'initialisation du composant
   ngOnInit(): void {
-    console.log('init');
+    console.log("init");
     const stored = this.localStorageService.get(ComposantComponent.STORAGE_KEY);
     this.value = stored !== null ? stored : ComposantComponent.DEFAULT_VALUE;
   }
 
   // Accroche lors de la destruction du composant
   ngOnDestroy(): void {
-    console.log('destruction');
+    console.log("destruction");
   }
 
   // Lorsque la valeur change, on stock dans le LocalStorage
@@ -42,8 +42,8 @@ export class ComposantComponent implements OnInit, OnDestroy {
   }
 
   // Sur un delete, on efface la variable et stock dans LocalStorage
-  delete(event: MouseEvent) {
-    this.value = '';
+  clear(event: MouseEvent) {
+    this.value = "";
     this.saveInLocalStorage();
   }
 

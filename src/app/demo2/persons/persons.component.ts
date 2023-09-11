@@ -1,19 +1,19 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { Subscription } from 'rxjs';
-import { Person } from '../person.model';
-import { PersonService } from '../person.service';
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { FormBuilder } from "@angular/forms";
+import { Subscription } from "rxjs";
+import { Person } from "../person.model";
+import { PersonService } from "../person.service";
 
 @Component({
-  selector: 'app-persons',
-  templateUrl: './persons.component.html',
-  styleUrls: ['./persons.component.css'],
+  selector: "app-persons",
+  templateUrl: "./persons.component.html",
+  styleUrls: ["./persons.component.css"],
 })
 export class PersonsComponent implements OnInit, OnDestroy {
   // On crée la structure du formulaire.
   // On assigne le formulaire et ses champs dans le HTML
   form = this.formBuilder.group({
-    name: '',
+    name: "",
   });
 
   persons: Person[] = [];
@@ -40,7 +40,6 @@ export class PersonsComponent implements OnInit, OnDestroy {
 
   onSubmit(): void {
     if (this.form.valid) {
-      console.log(this.form.value);
       if (this.form.value.name) {
         this.personService.add(this.form.value.name);
       }
